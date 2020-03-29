@@ -6,13 +6,17 @@ import './playlist.css';
 
 class Playlist extends React.Component {
     render() {
-        console.log('Inside Playlist render function: props.searchResults is of type array: ' + Array.isArray(this.props.playlistTracks))
+        let tracklist = this.props.playlistTracks
+        let {onRemove} = this.props
+        
         return (
             <div className="Playlist">
                 <input 
                     defaultValue="New Playlist"/>
                 <TrackList 
-                    tracklist={this.props.playlistTracks}/>
+                    tracklist={tracklist}
+                    isRemoval={true} 
+                    onRemove={onRemove}/>
                 <button 
                     className="Playlist-save">SAVE TO SPOTIFY</button>
             </div>

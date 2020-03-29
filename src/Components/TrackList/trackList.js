@@ -6,8 +6,8 @@ import Track from '../Track/track';
 
 class TrackList extends React.Component {
     render() {
-        let onAdd = this.props.onAdd
-        console.log('Inside Tracklist render function: props.tracklist is of type array: ' + Array.isArray(this.props.tracklist))
+        let {onAdd, onRemove, isRemoval } = this.props
+
         let tracks = this.props.tracklist.map(track => {
             return (<Track 
                 track={track}
@@ -16,7 +16,8 @@ class TrackList extends React.Component {
                 trackArtist={track.artist}
                 trackAlbum={track.album} 
                 onAdd={onAdd}
-                isRemoval={this.props.isRemoval}
+                onRemove={onRemove}
+                isRemoval={isRemoval}
             />)
         })
         return (

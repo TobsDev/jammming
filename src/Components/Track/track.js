@@ -11,16 +11,15 @@ class Track extends Component {
         }
         this.renderAction = this.renderAction.bind(this);
         this.addTrack = this.addTrack.bind(this);
+        this.removeTrack = this.removeTrack.bind(this);
     }
 
     addTrack() {
-        let track = {
-            "id": '4',
-            "name": 'test name 4',
-            "artist": 'test artist 4',
-            "album": 'test album 4'
-        }
         this.props.onAdd(this.props.track)
+    }
+
+    removeTrack() {
+        this.props.onRemove(this.props.track)
     }
     
     renderAction(isRemoval) {
@@ -40,7 +39,7 @@ class Track extends Component {
                 </div>
                 <button 
                     className="Track-action"
-                    onClick={this.addTrack}
+                    onClick={this.props.isRemoval ? this.removeTrack : this.addTrack}
                     >
                         {this.renderAction(this.props.isRemoval)}
                     </button>
