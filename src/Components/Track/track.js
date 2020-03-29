@@ -9,7 +9,18 @@ class Track extends Component {
         this.state = {
              
         }
-        this.renderAction = this.renderAction.bind(this)
+        this.renderAction = this.renderAction.bind(this);
+        this.addTrack = this.addTrack.bind(this);
+    }
+
+    addTrack() {
+        let track = {
+            "id": '4',
+            "name": 'test name 4',
+            "artist": 'test artist 4',
+            "album": 'test album 4'
+        }
+        this.props.onAdd(this.props.track)
     }
     
     renderAction(isRemoval) {
@@ -27,7 +38,12 @@ class Track extends Component {
                     <h3>{this.props.trackName}</h3>
                     <p>{this.props.trackArtist} | {this.props.trackAlbum}</p>
                 </div>
-                <button className="Track-action">{this.renderAction(this.props.isRemoval) /*<!-- + or - will go here -->*/}</button>
+                <button 
+                    className="Track-action"
+                    onClick={this.addTrack}
+                    >
+                        {this.renderAction(this.props.isRemoval)}
+                    </button>
             </div>
         );
     }
@@ -43,3 +59,4 @@ Track.propTypes = {
 
 
 export default Track;
+

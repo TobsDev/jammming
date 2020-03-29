@@ -9,11 +9,18 @@ class SearchResults extends React.Component {
     }
 
     render() {
+
         let tracklist = this.props.searchResults;
+        console.log('Inside Searchresults render function: props.searchResults is of type array: ' + Array.isArray(tracklist))
+        let stuff = 'test stuff'
         return (
             <div className="SearchResults">
                 <h2>Results</h2>
-                <TrackList tracklist={tracklist}/>
+                <TrackList 
+                    onAdd={this.props.onAdd}
+                    tracklist={tracklist} 
+                    isRemoval={false} 
+                    />
             </div>
         );
     }
@@ -27,3 +34,4 @@ SearchResults.propTypes = {
 
 export default SearchResults;
 
+{/* onAdd={handleAddTrack} */}

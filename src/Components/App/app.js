@@ -4,42 +4,63 @@ import './app.css';
 import SearchBar from '../SearchBar/searchBar';
 import SearchResults from '../SearchResults/searchResults';
 import Playlist from '../Playlist/playlist';
+import { isReturnStatement } from '@babel/types';
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
     
         this.state = {
-            searchResults: [ 
+            "searchResults": [ 
                 {
-                    id: '1',
-                    name: 'test name 1',
-                    artist: 'test artist 1',
-                    album: 'test album 1'
-                },
+                    "id":"1",
+                    "name":"test name 1",
+                    "artist":"test artist 1",
+                    "album":"test album 1"
+                 },
+                 {
+                    "id":"2",
+                    "name":"test name 2",
+                    "artist":"test artist 2",
+                    "album":"test album 2"
+                 },
                 {
-                    id: '2',
-                    name: 'test name 2',
-                    artist: 'test artist 2',
-                    album: 'test album 2'
+                   "id":"3",
+                   "name":"test name 3",
+                   "artist":"test artist 3",
+                   "album":"test album 3"
                 }
             ],
-            playlistName: 'test playlist name',
-            playlistTracks: [
+            "playlistName": 'test playlist name',
+            "playlistTracks": [
                 {
-                    id: '1',
-                    name: 'test name 1',
-                    artist: 'test artist 1',
-                    album: 'test album 1'
+                   "id":"1",
+                   "name":"test name 1",
+                   "artist":"test artist 1",
+                   "album":"test album 1"
                 },
                 {
-                    id: '2',
-                    name: 'test name 2',
-                    artist: 'test artist 2',
-                    album: 'test album 2'
+                   "id":"2",
+                   "name":"test name 2",
+                   "artist":"test artist 2",
+                   "album":"test album 2"
                 }
-            ]
+             ]
         }
+        this.addTrack = this.addTrack.bind(this);
+    }
+
+    addTrack(track) {
+        if(this.state.playlistTracks.every(playlistTrack => 
+            playlistTrack.id != track.id )) {
+                let playlist = this.state.playlistTracks;
+                playlist.push(track);
+            
+                this.setState({
+                    playlistTracks: playlist
+                }) 
+        } 
+        return
     }
     
     render() {
@@ -49,8 +70,12 @@ export default class App extends React.Component {
                 <div className="App">
                     <SearchBar />
                     <div className="App-playlist">
-                        <SearchResults searchResults={this.state.searchResults}/>
-                        <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}/>
+                        <SearchResults 
+                            searchResults={this.state.searchResults}
+                            onAdd={this.addTrack}/>
+                        <Playlist 
+                            playlistName={this.state.playlistName} 
+                            playlistTracks={this.state.playlistTracks}/>
                     </div>
                 </div>
             </div>
@@ -60,3 +85,13 @@ export default class App extends React.Component {
 
 // might remove this later on. Currently app.js gets rendered in index.js
 //ReactDOM.render(<App />, document.getElementById('root'))
+
+/* if(this.state.playlistTracks.every(playlistTrack => 
+            playlistTrack.id === track.id )) {
+                let newPlaylist = this.state.playlistTracks.push(track)
+                this.setState({
+                    playlistTracks: newPlaylist
+                })
+        }
+        
+             */
