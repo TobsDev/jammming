@@ -14,6 +14,7 @@ class Playlist extends React.Component {
         let name = e.target.value
         this.props.onNameChange(name)
     }
+
     render() {
         let tracklist = this.props.playlistTracks
         let {onRemove} = this.props

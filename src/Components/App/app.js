@@ -16,19 +16,22 @@ export default class App extends React.Component {
                     "id":"1",
                     "name":"test name 1",
                     "artist":"test artist 1",
-                    "album":"test album 1"
+                    "album":"test album 1",
+                    "uri": "test uri 1"
                  },
                  {
                     "id":"2",
                     "name":"test name 2",
                     "artist":"test artist 2",
-                    "album":"test album 2"
+                    "album":"test album 2",
+                    "uri": "test uri 2"
                  },
                 {
                    "id":"3",
                    "name":"test name 3",
                    "artist":"test artist 3",
-                   "album":"test album 3"
+                   "album":"test album 3",
+                   "uri": "test uri 3"
                 }
             ],
             "playlistName": 'test playlist name',
@@ -37,19 +40,22 @@ export default class App extends React.Component {
                    "id":"1",
                    "name":"test name 1",
                    "artist":"test artist 1",
-                   "album":"test album 1"
+                   "album":"test album 1",
+                   "uri": "test uri 1"
                 },
                 {
                    "id":"2",
                    "name":"test name 2",
                    "artist":"test artist 2",
-                   "album":"test album 2"
+                   "album":"test album 2",
+                   "uri": "test uri 2"
                 }
              ]
         }
         this.addTrack = this.addTrack.bind(this)
         this.removeTrack = this.removeTrack.bind(this)
         this.updatePlaylistName = this.updatePlaylistName.bind(this)
+        this.savePlaylist = this.savePlaylist.bind(this)
     }
 
     addTrack(track) {
@@ -83,6 +89,12 @@ export default class App extends React.Component {
             playlistName: newPlaylistName
         })
     }
+
+    savePlaylist() {
+        let trackURIs = this.state.playlistTracks.map(playlistTrack => playlistTrack.uri)
+
+        return trackURIs
+    }
     
     render() {
         return(
@@ -98,7 +110,8 @@ export default class App extends React.Component {
                             playlistName={this.state.playlistName} 
                             playlistTracks={this.state.playlistTracks}
                             onRemove={this.removeTrack}
-                            onNameChange={this.updatePlaylistName} />
+                            onNameChange={this.updatePlaylistName}
+                            onSave={this.savePlaylist} />
                     </div>
                 </div>
             </div>
