@@ -56,6 +56,7 @@ export default class App extends React.Component {
         this.removeTrack = this.removeTrack.bind(this)
         this.updatePlaylistName = this.updatePlaylistName.bind(this)
         this.savePlaylist = this.savePlaylist.bind(this)
+        this.search = this.search.bind(this)
     }
 
     addTrack(track) {
@@ -95,20 +96,27 @@ export default class App extends React.Component {
 
         return trackURIs
     }
+
+    search(term) {
+        console.log('Searchterm: ' + term)
+    }
     
     render() {
+        let { searchResults, playlistName, playlistTracks } = this.state
+
         return(
             <div>
                 <h1>Ja<span className="highlight">mmm</span>ing</h1>
                 <div className="App">
-                    <SearchBar />
+                    <SearchBar 
+                        onSearch={this.search}/>
                     <div className="App-playlist">
                         <SearchResults 
-                            searchResults={this.state.searchResults}
-                            onAdd={this.addTrack}/>
+                            searchResults={searchResults}
+                            onAdd={this.addTrack} />
                         <Playlist 
-                            playlistName={this.state.playlistName} 
-                            playlistTracks={this.state.playlistTracks}
+                            playlistName={playlistName} 
+                            playlistTracks={playlistTracks}
                             onRemove={this.removeTrack}
                             onNameChange={this.updatePlaylistName}
                             onSave={this.savePlaylist} />

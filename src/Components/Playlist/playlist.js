@@ -16,8 +16,7 @@ class Playlist extends React.Component {
     }
 
     render() {
-        let tracklist = this.props.playlistTracks
-        let {onRemove} = this.props
+        let {onRemove, playlistTracks} = this.props
         
         return (
             <div className="Playlist">
@@ -25,7 +24,7 @@ class Playlist extends React.Component {
                     defaultValue="New Playlist"
                     onChange={this.handleNameChange}/>
                 <TrackList 
-                    tracklist={tracklist}
+                    tracklist={playlistTracks}
                     isRemoval={true} 
                     onRemove={onRemove}/>
                 <button 
